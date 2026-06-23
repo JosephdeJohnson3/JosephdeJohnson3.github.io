@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joseph Johnson — Finance & Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0b0e17;
+      --surface:  #13172a;
+      --border:   #1f2438;
+      --blue:     #4f8ef7;
+      --green:    #00c896;
+      --text:     #e8eaf0;
+      --muted:    #6b7090;
+      --radius:   14px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 60px;
+      background: rgba(11,14,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-name {
+      font-size: 15px; font-weight: 600; color: var(--text);
+      text-decoration: none; letter-spacing: -0.01em;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 140px 48px 80px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--blue);
+      background: rgba(79,142,247,0.1);
+      border: 1px solid rgba(79,142,247,0.2);
+      border-radius: 20px; padding: 4px 12px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 54px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--blue); }
+    .hero p {
+      font-size: 17px; color: var(--muted); max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ── Projects ── */
+    .projects {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px 120px;
+    }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 32px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      border-color: rgba(79,142,247,0.35);
+      transform: translateY(-2px);
+    }
+    .card-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 12px;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-size: 17px; font-weight: 600;
+      letter-spacing: -0.02em; color: var(--text);
+    }
+    .status-badge {
+      flex-shrink: 0;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 20px;
+    }
+    .status-live   { background: rgba(0,200,150,0.12); color: var(--green); border: 1px solid rgba(0,200,150,0.25); }
+    .status-local  { background: rgba(79,142,247,0.12); color: var(--blue); border: 1px solid rgba(79,142,247,0.25); }
+    .status-wip    { background: rgba(245,200,66,0.10); color: #d4a800; border: 1px solid rgba(245,200,66,0.20); }
+
+    .card-desc {
+      font-size: 13.5px; color: var(--muted);
+      line-height: 1.65; margin-bottom: 20px; flex: 1;
+    }
+
+    .tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 22px;
+    }
+    .tag {
+      font-size: 11px; font-weight: 500;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 6px; padding: 2px 9px;
+    }
+
+    .card-footer { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500;
+      padding: 7px 14px; border-radius: 8px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.15s, background 0.15s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-ghost {
+      background: transparent; color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+    /* Terminal snippet */
+    .terminal {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: 'Courier New', monospace;
+      font-size: 11.5px;
+      color: var(--green);
+      margin-bottom: 16px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .terminal span { color: var(--muted); user-select: none; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-name" href="#">Joseph Johnson</a>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="https://github.com/josephdejohnson3" target="_blank">GitHub</a>
+      <a href="mailto:josephdejohnson3@gmail.com">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-tag">Finance &amp; Technology</div>
+    <h1>Building tools at the<br/>intersection of <span>finance</span><br/>and code.</h1>
+    <p>Masters student in Finance. I build quantitative tools, dashboards, and applications that solve real problems in wealth management, mortgage finance, and capital markets.</p>
+  </section>
+
+  <section class="projects" id="projects">
+    <div class="section-label">Projects</div>
+    <div class="grid">
+
+      <!-- 1. Financial Planning Dashboard -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Financial Planning Dashboard</div>
+          <span class="status-badge status-live">Live</span>
+        </div>
+        <p class="card-desc">
+          Goal-based financial planning tool powered by Monte Carlo simulation (5,000 paths). Enter your savings, contributions, and asset allocation — model retirement, home purchase, college tuition, and custom goals. Includes sensitivity analysis showing the impact of saving more each month.
+        </p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">Monte Carlo</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">Wealth Management</span>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-primary" href="https://npitcrrcpc4lkzry9dbthg.streamlit.app/" target="_blank">↗ Open App</a>
+          <a class="btn btn-ghost" href="https://github.com/JosephdeJohnson3/financial-planning-dashboard-1" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <!-- 2. Mortgage Sensitivity Tool -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Mortgage Sensitivity &amp; Origination Analysis</div>
+          <span class="status-badge status-live">Live</span>
+        </div>
+        <p class="card-desc">
+          Quantitative analysis tool built for mortgage finance. Models sensitivity of loan performance across rate environments, prepayment assumptions, and origination channels. Designed with Newrez and non-QM lending workflows in mind.
+        </p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Jupyter</span>
+          <span class="tag">Mortgage Finance</span>
+          <span class="tag">Sensitivity Analysis</span>
+          <span class="tag">Fixed Income</span>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-primary" href="https://github.com/josephdejohnson3/mortgage-sensitivity-tool" target="_blank">↗ View Notebook</a>
+        </div>
+      </div>
+
+      <!-- 3. Market News Dashboard -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Market News Dashboard</div>
+          <span class="status-badge status-wip">In Progress</span>
+        </div>
+        <p class="card-desc">
+          Real-time market news aggregator and dashboard. Pulls live financial headlines, filters by ticker or sector, and surfaces relevant market-moving events. Built for traders and analysts who need signal over noise.
+        </p>
+        <div class="tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">React</span>
+          <span class="tag">Financial Data</span>
+          <span class="tag">APIs</span>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-ghost" href="https://github.com/josephdejohnson3/market-news-dashboard" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <!-- 4. VSP Website -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">VSP — AI-Assisted Website</div>
+          <span class="status-badge status-live">Live</span>
+        </div>
+        <p class="card-desc">
+          Professional website built using Claude Code, Anthropic's AI-powered development tool. Demonstrates the application of AI-assisted engineering to produce production-ready web experiences rapidly.
+        </p>
+        <div class="tags">
+          <span class="tag">Claude Code</span>
+          <span class="tag">AI-Assisted Dev</span>
+          <span class="tag">Web</span>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-primary" href="VSP_URL_HERE" target="_blank">↗ Visit Site</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>Joseph Johnson &nbsp;·&nbsp; <a href="mailto:josephdejohnson3@gmail.com">josephdejohnson3@gmail.com</a> &nbsp;·&nbsp; <a href="https://github.com/josephdejohnson3" target="_blank">github.com/josephdejohnson3</a></p>
+  </footer>
+
+</body>
+</html>
